@@ -1,0 +1,21 @@
+.spacer {
+  flex: 1 1 auto;
+}
+.link {
+  display: flex;
+  text-decoration: none;
+  color: white;
+  padding: 5px;
+}
+.link:hover {
+  color: #ff4081;
+}
+.link-icon {
+  margin-top: 5px;
+}
+.link-icon.left {
+  margin-left: 5px;
+}
+.link-icon.right {
+  margin-right: 5px;
+}
