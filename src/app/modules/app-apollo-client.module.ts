@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { ApolloModule, Apollo } from 'apollo-angular';
 import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
+import { ApolloLink, concat } from 'apollo-link';
+import { AuthService } from '../services/auth.service';
+
 
 @NgModule({
   imports: [
@@ -20,11 +23,21 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 })
 export class AppApolloClientModule {
   constructor(
-    apollo: Apollo,
-    httpLink: HttpLink
+    private apollo: Apollo,
+    private httpLink: HttpLink,
+    private auth: AuthService
+
   ) {
+    const http = httpLink.create({ uri: 'http://localhost:3000/graphql' });
+    const authMiddleware = new ApolloLink((operation, forward) => {
+      // add the authorization to the headers
+      operation.setContext({
+        headers: new HttpHeaders().set('x-access-token', this.auth.getToken())
+      });
+      return forward(operation);
+    });
     apollo.create({
-      link: httpLink.create({ uri: 'http://localhost:3000/graphql' }),
+      link: concat(authMiddleware, http),
       cache: new InMemoryCache()
     });
   }

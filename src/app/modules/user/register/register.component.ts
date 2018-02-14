@@ -1,33 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { makePasswordValidator } from '../../../utils/custom-validators';
-import gql from 'graphql-tag';
-import { Apollo } from 'apollo-angular/Apollo';
+import { UserService } from '../user.service';
 
-const registerMutation = gql`
-  mutation registerMutation($username: String!, $password: String!) {
-    addUser(input: {
-      username: $username,
-      password: $password
-    }) {
-      key
-    }
-  }
-`;
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
   registerForm: FormGroup;
   constructor(
     private formBuilder: FormBuilder,
-    private apollo: Apollo
+    private userService: UserService
   ) { }
 
   ngOnInit() {
     this.buildRegisterForm();
+  }
+  ngOnDestroy() {
+    this.registerForm.reset();
   }
   buildRegisterForm() {
     this.registerForm = this.formBuilder.group({
@@ -39,17 +31,10 @@ export class RegisterComponent implements OnInit {
     });
   }
   handleSubmit() {
-    console.log(this.registerForm.value);
     const { username, password } = this.registerForm.value;
-    this.apollo.mutate({
-      mutation: registerMutation,
-      variables: {
-        username,
-        password
-      }
-    }).subscribe(({ data }) => {
-      console.log(data);
-    }, error => console.error(error));
+    this.userService.register({ username, password }).subscribe(undefined, (error) => {
+      this.registerForm.get('username').setErrors({ unique: true });
+    });
   }
 
 }

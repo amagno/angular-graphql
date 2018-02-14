@@ -5,13 +5,28 @@ import { TaskRoutingModule } from './task-routing.module';
 import { ContainerComponent } from './container/container.component';
 import { ListComponent } from './list/list.component';
 import { AppStylesModule } from '../app-styles.module';
+import { NewComponent } from './new/new.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AuthTokenGuard } from './auth-token.guard';
+import { TaskService } from './task.service';
+import { EditComponent } from './edit/edit.component';
 
 @NgModule({
   imports: [
     CommonModule,
     TaskRoutingModule,
-    AppStylesModule
+    ReactiveFormsModule,
+    AppStylesModule,
   ],
-  declarations: [ContainerComponent, ListComponent]
+  providers: [
+    TaskService,
+    AuthTokenGuard
+  ],
+  declarations: [
+    ContainerComponent,
+    ListComponent,
+    NewComponent,
+    EditComponent
+  ]
 })
 export class TaskModule { }

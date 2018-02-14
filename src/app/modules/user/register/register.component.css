@@ -11,18 +11,7 @@
   margin-left: 10px;
   margin-right: 10px;
 }
-.flex {
-  display: flex;
-}
-.flex.row {
-  flex-direction: row;
-}
-.flex.center {
-  justify-content: center;
-}
-.flex.column {
-  flex-direction: column;
-}
+
 .form.title {
   text-transform: uppercase;
   text-align: center;

@@ -5,6 +5,9 @@ import { UserRoutingModule } from './user-routing.module';
 import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppStylesModule } from '../app-styles.module';
+import { LogoutComponent } from './logout/logout.component';
+import { UserService } from './user.service';
+import { NoAuthGuard } from './no-auth.guard';
 
 @NgModule({
   imports: [
@@ -15,7 +18,12 @@ import { AppStylesModule } from '../app-styles.module';
   ],
   declarations: [
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    LogoutComponent
+  ],
+  providers: [
+    UserService,
+    NoAuthGuard
   ]
 })
 export class UserModule { }

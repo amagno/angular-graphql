@@ -5,21 +5,37 @@
             The actual rendered columns are set as a property on the row definition" -->
   
       <!-- Position Column -->
-      <ng-container matColumnDef="order">
-        <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.order}} </mat-cell>
+      <ng-container matColumnDef="createdAt">
+        <mat-header-cell *matHeaderCellDef> Data </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.createdAt | date: 'dd/MM/yyyy HH:mm' }} </mat-cell>
       </ng-container>
   
       <!-- Name Column -->
       <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
       </ng-container>
   
       <!-- Weight Column -->
       <ng-container matColumnDef="checked">
-        <mat-header-cell *matHeaderCellDef> Checked </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.checked ? 'complete' : 'none'}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef> Completada </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <div style="display: flex">
+          <mat-checkbox [checked]="element.checked" (change)="handleChecked(element.id, !element.checked)"></mat-checkbox>            
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="options">
+        <mat-header-cell *matHeaderCellDef> Opcões </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button mat-icon-button [routerLink]="['edit', element.id]">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn"  (click)="handleDelete(element.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-cell>
       </ng-container>
   
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

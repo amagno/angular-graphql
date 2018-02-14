@@ -1,21 +1,15 @@
 .spacer {
   flex: 1 1 auto;
 }
-.link {
-  display: flex;
-  text-decoration: none;
-  color: white;
-  padding: 5px;
+.link.register {
+  background-color: aquamarine;
+  color: rgba(0, 0, 0, 0.87);
+
 }
-.link:hover {
-  color: #ff4081;
+.side-link {
+  text-align: left;
+  border-radius: 0;
 }
-.link-icon {
-  margin-top: 5px;
-}
-.link-icon.left {
-  margin-left: 5px;
-}
-.link-icon.right {
-  margin-right: 5px;
+.side-link.icon {
+  margin-bottom: 2px;
 }

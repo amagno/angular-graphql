@@ -48,3 +48,30 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+/* */
+
+.register-color {
+  background-color: aquamarine;
+}
+.flex {
+  display: flex;
+}
+.flex.row {
+  flex-direction: row;
+}
+.flex.center {
+  justify-content: center;
+}
+.flex.column {
+  flex-direction: column;
+}
+.mat-checkbox-layout {
+  display: unset !important;
+}
+.mat-cell, .mat-header-cell {
+	display: flex;
+	justify-content: center !important;
+	line-height: 50px !important;
+	vertical-align: middle !important;
+}

@@ -8,6 +8,8 @@ import { AppApolloClientModule } from './app-apollo-client.module';
 import { AppStylesModule } from './app-styles.module';
 import { UserModule } from './user/user.module';
 import { TaskModule } from './task/task.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthService } from '../services/auth.service';
 
 
 @NgModule({
@@ -16,13 +18,14 @@ import { TaskModule } from './task/task.module';
   ],
   imports: [
     BrowserModule,
-    UserModule,
-    TaskModule,
     AppApolloClientModule,
+    BrowserAnimationsModule,
     AppStylesModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [
+    AuthService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

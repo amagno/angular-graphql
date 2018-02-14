@@ -1,0 +1,23 @@
+<mat-card class="register-container">
+  <h4 class="form title">Editar tarefa</h4>
+  <form [formGroup]="editTaskForm" novalidate (ngSubmit)="handleSubmit()">
+    <!-- INPUTS -->
+    <div class="flex row center">
+      <mat-form-field>
+        <input type="text" matInput placeholder="Digite o nome da tarefa" formControlName="name">
+      </mat-form-field>
+      <div style="margin-left: 20px; margin-top: 10px;">
+        <mat-checkbox formControlName="checked">Completada</mat-checkbox>        
+      </div>
+    </div>
+    <!-- BUTTONS -->
+    <div class="flex row center">
+      <button mat-raised-button color="primary" type="submit" [disabled]="editTaskForm.invalid" class="btn register-color">
+        Enviar
+      </button>
+      <button mat-raised-button routerLink="/tasks" color="warn" type="reset" class="btn" style="margin-left: 20px;">
+        Fechar
+      </button>
+    </div>
+  </form>
+</mat-card>
