@@ -6,10 +6,12 @@ import { AuthTokenGuard } from './auth-token.guard';
 import { EditComponent } from './edit/edit.component';
 
 const routes: Routes = [
-  { path: '', canActivate: [AuthTokenGuard], component: ContainerComponent, children: [
-  { path: 'new', component: NewComponent },
-  { path: 'edit/:id', component: EditComponent }
-  ] },
+  { path: '', canActivate: [AuthTokenGuard], component: ContainerComponent,
+    children: [
+      { path: 'new', component: NewComponent },
+      { path: 'edit/:id', component: EditComponent }
+    ],
+  },
 ];
 
 @NgModule({

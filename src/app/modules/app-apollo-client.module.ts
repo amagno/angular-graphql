@@ -3,7 +3,7 @@ import { HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { ApolloModule, Apollo } from 'apollo-angular';
 import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import { ApolloLink, concat } from 'apollo-link';
+import { ApolloLink, from  } from 'apollo-link';
 import { AuthService } from '../services/auth.service';
 
 
@@ -36,8 +36,16 @@ export class AppApolloClientModule {
       });
       return forward(operation);
     });
+    const loadingMiddleware = new ApolloLink((operation, forward) => {
+      console.log('APOLLO BEFORE LOADING MIDDLEWARE');
+      return forward(operation);
+    });
+    const afterMiddleware = new ApolloLink((operation, forward) => {
+      console.log('APOLLO AFTER LOADING MIDDLEWARE');
+      return forward(operation);
+    });
     apollo.create({
-      link: concat(authMiddleware, http),
+      link: from([loadingMiddleware, afterMiddleware, authMiddleware, http]),
       cache: new InMemoryCache()
     });
   }

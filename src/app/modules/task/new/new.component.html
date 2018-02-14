@@ -1,5 +1,5 @@
-<mat-card class="register-container">
-  <h4 class="form title">Registro</h4>
+<mat-card class="register-container" [@fadeAnimation]>
+  <h4 class="form title">Adicionar tarefa</h4>
   <form [formGroup]="newTaskForm" novalidate (ngSubmit)="handleSubmit()">
     <!-- INPUTS -->
     <div class="flex center column">
@@ -8,7 +8,7 @@
       </mat-form-field>
     </div>
     <!-- BUTTONS -->
-    <div class="flex row center">
+    <div class="flex row left">
       <button mat-raised-button color="primary" type="submit" [disabled]="newTaskForm.invalid" class="btn register-color">
         Enviar
       </button>

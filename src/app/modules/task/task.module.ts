@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AuthTokenGuard } from './auth-token.guard';
 import { TaskService } from './task.service';
 import { EditComponent } from './edit/edit.component';
+import { TaskAnimationService } from './task-animation.service';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { EditComponent } from './edit/edit.component';
   ],
   providers: [
     TaskService,
+    TaskAnimationService,
     AuthTokenGuard
   ],
   declarations: [

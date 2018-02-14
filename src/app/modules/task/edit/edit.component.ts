@@ -1,21 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TaskService, Task } from '../task.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { fadeAnimation } from '../../../utils/fade-animation';
+import { TaskAnimationService } from '../task-animation.service';
 
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.css']
+  styleUrls: ['./edit.component.css'],
+  animations: [fadeAnimation]
 })
 export class EditComponent implements OnInit {
+  // @HostBinding('attr.@fadeAnimation') fadeAnimation;
+
   editTaskForm: FormGroup;
   private id: string | number;
   constructor(
     private builder: FormBuilder,
     private taskService: TaskService,
+    private taskanimationService: TaskAnimationService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
   ) {
   }
   private getTask() {
@@ -29,6 +35,7 @@ export class EditComponent implements OnInit {
     });
   }
   ngOnInit() {
+    this.taskanimationService.setAnimationState('edit');
     this.editTaskForm = this.builder.group({
       name: ['', [Validators.required]],
       checked: [false]
@@ -36,7 +43,6 @@ export class EditComponent implements OnInit {
     this.getTask();
   }
   handleSubmit() {
-    console.log('EDITING', this.editTaskForm.value);
     this.taskService.edit(this.id, this.editTaskForm.value).subscribe(undefined, error => {
       console.log(error);
     });

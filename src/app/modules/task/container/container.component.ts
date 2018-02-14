@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
+import { fadeAnimation } from '../../../utils/fade-animation';
 
 @Component({
   selector: 'app-container',
   templateUrl: './container.component.html',
-  styleUrls: ['./container.component.css']
+  styleUrls: ['./container.component.css'],
+  animations: [fadeAnimation]
 })
-export class ContainerComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class ContainerComponent {
+  // @HostBinding('attr.@fadeAnimation') fadeAnimation;
 }

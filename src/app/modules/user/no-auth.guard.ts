@@ -7,6 +7,12 @@ import { AuthService } from '../../services/auth.service';
 export class NoAuthGuard implements CanActivate {
   constructor(private auth: AuthService, private router: Router) {}
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-      return this.auth.isNotLogged();
+      return this.auth.isLogged()
+      .do((logged) => {
+        if (logged) {
+          this.router.navigate(['/tasks']);
+        }
+      })
+      .map(logged => !logged);
   }
 }

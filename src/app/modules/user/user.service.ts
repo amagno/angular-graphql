@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import gql from 'graphql-tag';
 import { ApolloQueryResult } from 'apollo-client';
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from '../../services/auth.service';
 import { Subject } from 'rxjs/Subject';
-import { } from 'rxjs/observer';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/catch';
 import { Router } from '@angular/router';
+import gql from 'graphql-tag';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/map';
+
 export interface User {
   id?: string | number;
   username?: string;

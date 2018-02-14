@@ -9,7 +9,8 @@ import {
   MatCardModule,
   MatTableModule,
   MatSidenavModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatDividerModule
 } from '@angular/material';
 
 @NgModule({
@@ -22,7 +23,8 @@ import {
     MatCardModule,
     MatTableModule,
     MatSidenavModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatDividerModule
   ]
 })
 export class AppStylesModule { }
