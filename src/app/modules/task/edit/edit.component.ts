@@ -25,17 +25,27 @@ export class EditComponent implements OnInit {
   ) {
   }
   private getTask() {
-    const taskId = this.route.snapshot.params.id;
-    this.taskService.getTask(taskId).subscribe(response => {
+    // const taskId = this.route.snapshot.params.id;
+
+    // this.taskService.getTask(taskId).subscribe(response => {
+    //   this.id = response.data.task.id;
+    //   this.editTaskForm.get('name').setValue(response.data.task.name);
+    //   this.editTaskForm.get('checked').setValue(response.data.task.checked);
+    // }, async error => {
+    //   await this.router.navigate(['/tasks']);
+    // });
+    this.route.params.switchMap<any, any>(({ id }) => {
+      return this.taskService.getTask(id);
+    }).subscribe(response => {
       this.id = response.data.task.id;
       this.editTaskForm.get('name').setValue(response.data.task.name);
       this.editTaskForm.get('checked').setValue(response.data.task.checked);
-    }, async error => {
-      await this.router.navigate(['/tasks']);
+    }, error => {
+      console.log(error);
     });
   }
   ngOnInit() {
-    this.taskanimationService.setAnimationState('edit');
+    // this.taskanimationService.setAnimationState('edit');
     this.editTaskForm = this.builder.group({
       name: ['', [Validators.required]],
       checked: [false]

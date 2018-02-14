@@ -1,3 +1,9 @@
 .mat-checkbox-layout {
   display: flex !important;
 }
+.edit {
+  background-color: blue;
+}
+.new-task {
+  background-color: aquamarine;  
+}

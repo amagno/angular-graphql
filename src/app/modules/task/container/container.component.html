@@ -1,4 +1,5 @@
-<div class="main" [@fadeAnimation]>
-  <router-outlet></router-outlet>
+<div class="main" [@fadeAnimation]="o.isActivated ? 'change' : 'none'">
+  <!-- {{ activeRouteState(o) | async }} -->
+  <router-outlet #o="outlet"></router-outlet>
   <app-list></app-list>
 </div>

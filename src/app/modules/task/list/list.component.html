@@ -29,7 +29,7 @@
       <ng-container matColumnDef="options">
         <mat-header-cell *matHeaderCellDef> Opcões </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <button mat-icon-button [routerLink]="['edit', element.id]">
+          <button mat-icon-button (click)="handleEdit($event, element.id)">
             <mat-icon>edit</mat-icon>
           </button>
           <button mat-icon-button color="warn"  (click)="handleDelete(element.id)">
@@ -39,6 +39,6 @@
       </ng-container>
   
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;" [@fadeStateAnimation]="animationState"></mat-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" [@fadeStateAnimation]="animationState" [ngClass]="animationId === row.id ? animationClass : 'none'"></mat-row>
     </mat-table>
   </div>

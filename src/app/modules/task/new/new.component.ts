@@ -21,14 +21,17 @@ export class NewComponent implements OnInit {
 
   ngOnInit(
   ) {
+    this.taskAnimationService.setNone();
     this.newTaskForm = this.builder.group({
       taskName: ['', [Validators.required, Validators.minLength(3)]]
     });
   }
   handleSubmit() {
-    this.taskAnimationService.setAnimationState('in');
     const { taskName } = this.newTaskForm.value;
-    this.taskService.add(taskName).subscribe(undefined, error => {
+    this.taskService.add(taskName).subscribe(({ data }) => {
+      console.log(data.addTask.id);
+      this.taskAnimationService.setAnimationState({ className: 'new-task', id: data.addTask.id });
+    }, error => {
       console.log(error);
     });
   }
