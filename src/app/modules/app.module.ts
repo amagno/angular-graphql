@@ -10,11 +10,13 @@ import { UserModule } from './user/user.module';
 import { TaskModule } from './task/task.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthService } from '../services/auth.service';
+import { NotfoundComponent } from '../notfound/notfound.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NotfoundComponent
   ],
   imports: [
     BrowserModule,

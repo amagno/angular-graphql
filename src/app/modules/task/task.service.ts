@@ -1,9 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular/Apollo';
-import gql from 'graphql-tag';
 import { FetchType, ApolloQueryResult } from 'apollo-client';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../user/user.service';
+import {
+  addTaskMutation,
+  editTaskMutation,
+  deleteTaskMutation,
+  taskQuery,
+  tasksQuery
+} from '../../graphql/task.graphql';
+import 'rxjs/add/operator/switchMap';
+
 export interface Task {
   id?: string;
   name?: string;
@@ -11,57 +19,6 @@ export interface Task {
   checked?: boolean;
   createAt?: Date;
 }
-
-export const taskQuery = gql`
-  query taskQuery($id: ID!) {
-    task(id: $id) {
-      id
-      name
-      checked
-      createdAt
-    }
-  }
-`;
-export const tasksQuery = gql`
-  query tasksQuery {
-    tasks {
-      id
-      name
-      checked
-      createdAt
-    }
-  }
-`;
-export const addTaskMutation = gql`
-  mutation addTaskMutation($name: String!) {
-    addTask(input: {
-      name: $name
-    }) {
-      id
-      name
-      checked
-    }
-  }
-`;
-export const deleteTaskMutation = gql`
-  mutation deleteTaskMutation($id: ID!) {
-    deleteTask(id: $id) {
-      id,
-      name
-    }
-  }
-`;
-export const editTaskMutation = gql`
-  mutation editTaskMutation($id: ID!, $name: String, $checked: Boolean) {
-    editTask(id: $id, input: {
-      name: $name
-      checked: $checked
-    }) {
-      id,
-      name
-    }
-  }
-`;
 @Injectable()
 export class TaskService {
 

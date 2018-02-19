@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { AuthService } from '../../services/auth.service';
 import { Subject } from 'rxjs/Subject';
 import { Router } from '@angular/router';
-import gql from 'graphql-tag';
+import { loginMutation, registerMutation } from '../../graphql/user.graphql';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 
@@ -16,32 +16,7 @@ export interface User {
 export interface Token {
   key: string;
 }
-const loginMutation = gql`
-  mutation loginMutation($username: String!, $password: String!) {
-    login(input: {
-      username: $username
-      password: $password
-    }) {
-      key
-      user {
-        username
-      }
-    }
-  }
-`;
-const registerMutation = gql`
-  mutation registerMutation($username: String!, $password: String!) {
-    addUser(input: {
-      username: $username
-      password: $password
-    }) {
-      key
-      user {
-        username
-      }
-    }
-  }
-`;
+
 
 @Injectable()
 export class UserService {

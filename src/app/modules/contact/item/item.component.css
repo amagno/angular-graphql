@@ -1,0 +1,38 @@
+
+.mat-expansion-panel-header-title {
+  justify-content: space-between;
+}
+.contact-name {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.contact-name h3 {
+  margin-left: 5px;
+}
+.bold {
+  font-weight: bold;  
+}
+.desc .mat-checkbox {
+  margin-left: 5px;
+}
+.desc button {
+  margin-left: 5px;
+  border-radius: 100%;
+  width: 50px !important;
+  min-width: unset !important;
+  display: flex;
+  justify-content: center;
+}
+.desc > * {
+  margin: 5px;
+}
+.contacts-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.contacts-buttons .flex.row {
+  width: 30%;
+}

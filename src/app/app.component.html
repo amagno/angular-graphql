@@ -21,19 +21,24 @@
     <mat-drawer mode="side" [opened]="isLogged" style="border-right: 1px solid #3f51b5;">
       <div class="flex column">
         <button mat-raised-button routerLink="/tasks" routerLinkActive="mat-accent" class="side-link" [routerLinkActiveOptions]="{exact: true}">
-          Tarefas
-          <mat-icon class="side-link icon">playlist_add_check</mat-icon>
+          <span>Tarefas</span>
+          <mat-icon class="side-link icon">playlist_add_check</mat-icon>            
         </button>
         <button mat-raised-button [routerLink]="['/', 'tasks', 'new']" routerLinkActive="mat-accent" class="side-link" [routerLinkActiveOptions]="{exact: true}">
-          Nova Tarefa
-          <mat-icon class="side-link icon">playlist_add</mat-icon>
+          <span>Nova Tarefa</span>
+          <mat-icon class="side-link icon">playlist_add</mat-icon>            
+        </button>
+        <button mat-raised-button [routerLink]="['/', 'contacts']" routerLinkActive="mat-accent" class="side-link" [routerLinkActiveOptions]="{exact: true}">
+          <span>Contatos</span>
+          <mat-icon class="side-link icon">contacts</mat-icon>            
+        </button>
+        <button mat-raised-button [routerLink]="['/', 'contacts', 'new']" routerLinkActive="mat-accent" class="side-link" [routerLinkActiveOptions]="{exact: true}">
+          <span>Novo Contato</span>
+          <mat-icon class="side-link icon">contacts</mat-icon>            
         </button>
       </div>
     </mat-drawer>
     <mat-drawer-content class="main">
-      <div [@fadeAnimation]="getRouteState(o)">
-        {{ getRouteState(o) }}
-        <router-outlet #o="outlet"></router-outlet>        
-      </div>
+      <router-outlet></router-outlet>        
     </mat-drawer-content>
   </mat-drawer-container>

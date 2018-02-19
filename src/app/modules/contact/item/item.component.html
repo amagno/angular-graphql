@@ -1,0 +1,48 @@
+<!-- <mat-icon matListIcon>folder</mat-icon> -->
+<mat-divider></mat-divider>
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <div class="contact-name">
+        <mat-icon>
+          {{ contact.isFavorite ? 'favorite' : 'favorite_border' }}
+        </mat-icon>
+        <h3 matSubheader>{{ contact.name | titlecase }}</h3>
+      </div>
+    </mat-panel-title>
+    <mat-panel-description>
+      <h4 matLine>{{ contact.email | lowercase }}</h4>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <div class="flex column left desc">
+    <div class="flex row">
+      <span class="bold">Telefone: </span>
+      <span>{{ contact.phone ? contact.phone : 'Não possui' }}</span>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="flex row">
+      <span class="bold">Empresa: </span>
+      <span>{{ contact.company ? contact.company : 'Não possui' }}</span>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="flex row">
+      <span class="bold">Endereço: </span>
+      <span>{{ contact.address ? contact.address : 'Não possui' }}</span>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="contacts-buttons">
+      <div class="flex row">
+        <mat-checkbox [checked]="contact.isFavorite">Favorito</mat-checkbox>
+        <mat-checkbox [checked]="contact.isPublic">Publico</mat-checkbox>
+      </div>
+      <div class="flex row">
+        <button mat-raised-button [routerLink]="['/', 'contacts', 'edit', contact.id]">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-raised-button color="warn">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</mat-expansion-panel>

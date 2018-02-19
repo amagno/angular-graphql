@@ -6,13 +6,23 @@
   color: rgba(0, 0, 0, 0.87);
 
 }
-.side-link {
-  text-align: left;
+.side-link.mat-raised-button {
   border-radius: 0;
+  display: flex !important;
+  justify-content: flex-end !important;
 }
-.side-link.icon {
+/* .side-link .mat-button-wrapper {
+  border-radius: 0;
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+} */
+
+/* .side-link.icon {
   margin-bottom: 2px;
-}
+  margin-left: 20px;
+} */
 .main {
-  margin-left: 136px !important;
+  /* margin-left: 140px !important; */
+  min-height: 600px;
 }

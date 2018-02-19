@@ -1,0 +1,9 @@
+<mat-drawer-container>
+  <mat-drawer mode="side" [opened]="o.isActivated" position="end" class="side">
+    <router-outlet #o="outlet"></router-outlet>    
+  </mat-drawer>
+  <mat-drawer-content class="main">
+      <!-- {{ getRouteState(o) }} -->
+      <app-list></app-list>
+  </mat-drawer-content>
+</mat-drawer-container>
