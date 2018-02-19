@@ -74,3 +74,10 @@ export const contactQuery = gql`
     }
   }
 `;
+export const deleteContactMutation = gql`
+  mutation deleteContactMutation($id: ID!) {
+    deleteContact(id: $id) {
+      id
+    }
+  }
+`;

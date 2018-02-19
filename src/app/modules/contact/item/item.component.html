@@ -1,6 +1,6 @@
 <!-- <mat-icon matListIcon>folder</mat-icon> -->
 <mat-divider></mat-divider>
-<mat-expansion-panel>
+<mat-expansion-panel (opened)="setExpandState(true)" (closed)="setExpandState(false)" [expanded]="expandState">
   <mat-expansion-panel-header>
     <mat-panel-title>
       <div class="contact-name">
@@ -32,14 +32,14 @@
     <mat-divider></mat-divider>
     <div class="contacts-buttons">
       <div class="flex row">
-        <mat-checkbox [checked]="contact.isFavorite">Favorito</mat-checkbox>
-        <mat-checkbox [checked]="contact.isPublic">Publico</mat-checkbox>
+        <mat-checkbox [checked]="contact.isFavorite" (change)="handleToggleFavorite(contact.id, !contact.isFavorite)">Favorito</mat-checkbox>
+        <mat-checkbox [checked]="contact.isPublic" (change)="handleTogglePublic(contact.id, !contact.isPublic)">Publico</mat-checkbox>
       </div>
       <div class="flex row">
         <button mat-raised-button [routerLink]="['/', 'contacts', 'edit', contact.id]">
           <mat-icon>edit</mat-icon>
         </button>
-        <button mat-raised-button color="warn">
+        <button mat-raised-button color="warn" (click)="handleDelete(contact.id)">
           <mat-icon>delete</mat-icon>
         </button>
       </div>
