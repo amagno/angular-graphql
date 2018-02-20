@@ -32,8 +32,8 @@
     <mat-divider></mat-divider>
     <div class="contacts-buttons">
       <div class="flex row">
-        <mat-checkbox [checked]="contact.isFavorite">Favorito</mat-checkbox>
-        <mat-checkbox [checked]="contact.isPublic">Publico</mat-checkbox>
+        <mat-checkbox [checked]="contact.isFavorite" (change)="toggleFavorite()">Favorito</mat-checkbox>
+        <mat-checkbox [checked]="contact.isPublic" (change)="togglePublic()">Publico</mat-checkbox>
       </div>
       <div class="flex row">
         <button mat-raised-button [routerLink]="['/', 'contacts', 'edit', contact.id]">

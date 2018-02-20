@@ -25,7 +25,9 @@ export class ContactService {
     console.log('ADD: ', input);
     return this.apollo.mutate({
       mutation: addContactMutation,
-      variables: input,
+      variables: {
+        input
+      },
       refetchQueries: [
         { query: contactsQuery }
       ]
@@ -41,7 +43,7 @@ export class ContactService {
       mutation: editContactMutation,
       variables: {
         id,
-        ...input
+        input
       },
       refetchQueries: [
         { query: contactsQuery }
@@ -55,5 +57,11 @@ export class ContactService {
         id
       }
     });
+  }
+  setIsFavorite(id: string | number, value: boolean): Observable<any> {
+    return this.edit(id, { isFavorite: value });
+  }
+  setIsPublic(id: string | number, value: boolean): Observable<any> {
+    return this.edit(id, { isPublic: value });
   }
 }

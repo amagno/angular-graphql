@@ -54,6 +54,7 @@ export class NewComponent implements OnInit, OnDestroy {
   }
   handleSubmit() {
     if (this.edit.active) {
+      console.log(this.newForm.value);
       this.contactService.edit(this.edit.id, this.newForm.value).subscribe(response => {
         console.log('EDITTT', response);
       });
