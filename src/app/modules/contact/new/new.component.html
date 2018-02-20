@@ -1,5 +1,6 @@
 <mat-card class="register-container">
-  <button mat-icon-button routerLink="/contacts" class="close-btn">
+  <div #closeButton hidden></div>
+  <button mat-icon-button class="close-btn" (click)="handleClose()">
     <mat-icon>close</mat-icon>
   </button>
   <h4 class="form title">Novo Contato</h4>

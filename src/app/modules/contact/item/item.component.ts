@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Contact, ContactService } from '../contact.service';
 import * as store from 'store2';
 import { LoadingService } from '../loading.service';
+import { Router } from '@angular/router';
 
 interface ExpandState {
   open: boolean;
@@ -17,7 +18,8 @@ export class ItemComponent implements OnInit {
   expandState: boolean;
   constructor(
     private contactService: ContactService,
-    private loading: LoadingService
+    private loading: LoadingService,
+    private router: Router
   ) { }
   private setExpandState(value: boolean) {
     this.expandState = value;
@@ -29,9 +31,13 @@ export class ItemComponent implements OnInit {
   ngOnInit() {
     this.expandState = this.getExpandState() || false;
   }
-  handleDelete(id: string | number) {
+  async handleDelete(id: string | number) {
     this.contactService.delete(id).subscribe(undefined, error => console.log(error));
     this.loading.show(1000);
+    await this.router.navigate(['/', 'contacts']);
+  }
+  async handleEdit(id: string | number) {
+    await this.router.navigate(['/', 'contacts', 'edit', id]);
   }
   toggleFavorite() {
     this.contactService.setIsFavorite(this.contact.id, !this.contact.isFavorite).subscribe(undefined);

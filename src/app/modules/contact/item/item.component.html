@@ -36,7 +36,7 @@
         <mat-checkbox [checked]="contact.isPublic" (change)="togglePublic()">Publico</mat-checkbox>
       </div>
       <div class="flex row">
-        <button mat-raised-button [routerLink]="['/', 'contacts', 'edit', contact.id]">
+        <button mat-raised-button (click)="handleEdit(contact.id)">
           <mat-icon>edit</mat-icon>
         </button>
         <button mat-raised-button color="warn" (click)="handleDelete(contact.id)">

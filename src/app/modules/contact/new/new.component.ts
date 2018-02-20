@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { ContactService } from '../contact.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingService } from '../loading.service';
 
 @Component({
@@ -10,6 +10,7 @@ import { LoadingService } from '../loading.service';
   styleUrls: ['./new.component.css']
 })
 export class NewComponent implements OnInit, OnDestroy {
+  @ViewChild('closeButton') closeButton: ElementRef;
   newForm: FormGroup;
   edit = {
     active: false,
@@ -19,24 +20,27 @@ export class NewComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private contactService: ContactService,
     private route: ActivatedRoute,
+    private router: Router,
     private loading: LoadingService
   ) { }
 
   ngOnInit() {
     this.buildNewContactForm();
     this.route.params.subscribe(({ id }) => {
-      console.log('params');
       if (id) {
-        this.contactService.contactById(id).subscribe(({ data }) => {
+        this.contactService.contactById(id).subscribe(async ({ data }) => {
+          if (!data.contact) {
+            return await this.router.navigate(['/', 'contacts']);
+          }
           Object.keys(data.contact).forEach((key) => {
             if (key !== '__typename' && key !== 'id') {
               console.log(key);
               this.newForm.get(key).setValue(data.contact[key]);
             }
           });
+          this.edit.active = true;
+          this.edit.id = id;
         });
-        this.edit.active = true;
-        this.edit.id = id;
       }
     });
   }
@@ -57,17 +61,20 @@ export class NewComponent implements OnInit, OnDestroy {
   handleSubmit() {
     if (this.edit.active) {
       console.log(this.newForm.value);
-      this.contactService.edit(this.edit.id, this.newForm.value).subscribe(response => {
-        console.log('EDITTT', response);
+      this.contactService.edit(this.edit.id, this.newForm.value).subscribe(undefined, error => {
+        console.log(error);
       });
     } else {
-      this.contactService.add(this.newForm.value).subscribe(response => {
-        console.log(response);
-      }, error => {
+      this.contactService.add(this.newForm.value).subscribe(undefined, error => {
         this.newForm.get('email').setErrors({ unique: true });
       });
     }
     this.loading.show(1000);
   }
-
+  async handleClose() {
+    this.edit.active = false;
+    this.edit.id = undefined;
+    this.closeButton.nativeElement.click();
+    await this.router.navigate(['/', 'contacts']);
+  }
 }
