@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { ContactService } from '../contact.service';
 import { ActivatedRoute } from '@angular/router';
+import { LoadingService } from '../loading.service';
 
 @Component({
   selector: 'app-new',
@@ -17,7 +18,8 @@ export class NewComponent implements OnInit, OnDestroy {
   constructor(
     private formBuilder: FormBuilder,
     private contactService: ContactService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private loading: LoadingService
   ) { }
 
   ngOnInit() {
@@ -61,8 +63,11 @@ export class NewComponent implements OnInit, OnDestroy {
     } else {
       this.contactService.add(this.newForm.value).subscribe(response => {
         console.log(response);
-      }, error => console.log(error));
+      }, error => {
+        this.newForm.get('email').setErrors({ unique: true });
+      });
     }
+    this.loading.show(1000);
   }
 
 }

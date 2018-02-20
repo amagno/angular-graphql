@@ -8,13 +8,13 @@
     <div class="flex center column">
       <mat-form-field>
         <input type="text" matInput placeholder="Digite o nome de usuário" formControlName="name">
-        <!-- <mat-error *ngIf="registerForm.get('username').hasError('unique')">
-          Username já existe
-        </mat-error> -->
+        
       </mat-form-field>
       <mat-form-field>
         <input type="email" matInput placeholder="Digite o e-mail" formControlName="email">
-        <!-- <mat-hint align="end">Here's the dropdown arrow ^</mat-hint> -->
+        <mat-error *ngIf="newForm.get('email').hasError('unique')">
+          E-mail de contato já existe
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <input type="text" matInput placeholder="Digite o telefone" formControlName="phone">

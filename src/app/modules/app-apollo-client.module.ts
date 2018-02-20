@@ -25,8 +25,7 @@ export class AppApolloClientModule {
   constructor(
     private apollo: Apollo,
     private httpLink: HttpLink,
-    private auth: AuthService
-
+    private auth: AuthService,
   ) {
     const http = httpLink.create({ uri: 'http://localhost:3000/graphql' });
     const authMiddleware = new ApolloLink((operation, forward) => {
@@ -36,16 +35,18 @@ export class AppApolloClientModule {
       });
       return forward(operation);
     });
-    const loadingMiddleware = new ApolloLink((operation, forward) => {
-      console.log('APOLLO BEFORE LOADING MIDDLEWARE');
-      return forward(operation);
-    });
-    const afterMiddleware = new ApolloLink((operation, forward) => {
-      console.log('APOLLO AFTER LOADING MIDDLEWARE');
-      return forward(operation);
-    });
+    // const beforeMiddleware = new ApolloLink((operation, forward) => {
+    //   console.log('APOLLO BEFORE LOADING MIDDLEWARE');
+    //   this.loadingService.setLoading(true);
+    //   return forward(operation);
+    // });
+    // const afterMiddleware = new ApolloLink((operation, forward) => {
+    //   console.log('APOLLO AFTER LOADING MIDDLEWARE');
+    //   setTimeout(() => this.loadingService.setLoading(false), 1000);
+    //   return forward(operation);
+    // });
     apollo.create({
-      link: from([loadingMiddleware, afterMiddleware, authMiddleware, http]),
+      link: from([authMiddleware, http]),
       cache: new InMemoryCache()
     });
   }

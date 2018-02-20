@@ -9,6 +9,7 @@ import { AppStylesModule } from '../app-styles.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ContactService } from './contact.service';
 import { ItemComponent } from './item/item.component';
+import { LoadingService } from './loading.service';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { ItemComponent } from './item/item.component';
   ],
   declarations: [ListComponent, NewComponent, ContainerComponent, ItemComponent],
   providers: [
-    ContactService
+    ContactService,
+    LoadingService
   ]
 })
 export class ContactModule { }

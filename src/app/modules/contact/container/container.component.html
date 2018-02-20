@@ -1,9 +1,13 @@
-<mat-drawer-container>
+<mat-drawer-container [@fadeAnimation]>
   <mat-drawer mode="side" [opened]="o.isActivated" position="end" class="side">
     <router-outlet #o="outlet"></router-outlet>    
   </mat-drawer>
-  <mat-drawer-content class="main">
-      <!-- {{ getRouteState(o) }} -->
-      <app-list></app-list>
+  <mat-drawer-content class="main" [@fadeAnimation]="loading ? 'change' : 'none' ">
+      <ng-container *ngIf="loading">
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar> 
+      </ng-container> 
+      <ng-container *ngIf="!loading">
+        <app-list></app-list>        
+      </ng-container>
   </mat-drawer-content>
 </mat-drawer-container>

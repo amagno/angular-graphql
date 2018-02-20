@@ -1,6 +1,3 @@
 <div class="contacts-list">
-  <div *ngIf="!contacts.length" class="mat-typography no-contacts">
-    <h1 mat>NÃO HÁ CONTATOS PARA EXIBIR</h1>
-  </div>
   <app-item *ngFor="let contact of contacts" [contact]="contact"></app-item>
 </div>

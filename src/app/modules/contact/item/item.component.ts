@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Contact, ContactService } from '../contact.service';
 import * as store from 'store2';
+import { LoadingService } from '../loading.service';
 
 interface ExpandState {
   open: boolean;
@@ -15,7 +16,8 @@ export class ItemComponent implements OnInit {
   @Input('contact') contact: Contact;
   expandState: boolean;
   constructor(
-    private contactService: ContactService
+    private contactService: ContactService,
+    private loading: LoadingService
   ) { }
   private setExpandState(value: boolean) {
     this.expandState = value;
@@ -29,12 +31,7 @@ export class ItemComponent implements OnInit {
   }
   handleDelete(id: string | number) {
     this.contactService.delete(id).subscribe(undefined, error => console.log(error));
-  }
-  handleToggleFavorite(id: string | number, value: boolean) {
-    this.contactService.edit(id, { isFavorite: value }).subscribe(undefined, error => console.log(error));
-  }
-  handleTogglePublic(id: string | number, value: boolean) {
-    this.contactService.edit(id, { isPublic: value }).subscribe(undefined, error => console.log(error));
+    this.loading.show(1000);
   }
   toggleFavorite() {
     this.contactService.setIsFavorite(this.contact.id, !this.contact.isFavorite).subscribe(undefined);
