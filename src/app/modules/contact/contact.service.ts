@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular/Apollo';
-import { addContactMutation, contactsQuery, contactQuery, editContactMutation } from '../../graphql/contact.graphql';
+import { addContactMutation, contactsQuery, contactQuery, editContactMutation, deleteContactMutation } from '../../graphql/contact.graphql';
 import { User } from '../user/user.service';
 import { ApolloQueryResult } from 'apollo-client';
 import { Observable } from 'rxjs/Observable';
@@ -18,9 +18,7 @@ export interface Contact {
 }
 @Injectable()
 export class ContactService {
-
   constructor(private apollo: Apollo) { }
-
   add(input: Contact): Observable<any>  {
     console.log('ADD: ', input);
     return this.apollo.mutate({
@@ -56,6 +54,17 @@ export class ContactService {
       variables: {
         id
       }
+    });
+  }
+  delete(id: string | number): Observable<any> {
+    return this.apollo.mutate({
+      mutation: deleteContactMutation,
+      variables: {
+        id
+      },
+      refetchQueries: [
+        { query: contactsQuery }
+      ]
     });
   }
   setIsFavorite(id: string | number, value: boolean): Observable<any> {

@@ -43,3 +43,10 @@ export const contactQuery = gql`
   }
   ${contactFragment}
 `;
+export const deleteContactMutation = gql`
+  mutation deleteContactMutation($id: ID!) {
+    deleteContact(id: $id) {
+      id
+    }
+  }
+`;
